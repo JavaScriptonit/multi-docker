@@ -1,0 +1,22 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t Javascriptonit/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true Javascriptonit/react-test npm test
+
+after_success:
+  - doker build -t Javascriptonit/multi-client ./client
+  - doker build -t Javascriptonit/multi-nginx ./nginx
+  - doker build -t Javascriptonit/multi-server ./server
+  - doker build -t Javascriptonit/multi-worker ./worker
+# Log in to the Docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+# Take those images and push them to Docker hub
+  - docker push Javascriptonit/multi-client
+  - docker push Javascriptonit/multi-nginx
+  - docker push Javascriptonit/multi-server
+  - docker push Javascriptonit/multi-worker
