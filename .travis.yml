@@ -9,10 +9,10 @@ script:
   - docker run -e CI=true javascriptonit/react-test npm test
 
 after_success:
-  - doker build -t javascriptonit/multi-client ./client
-  - doker build -t javascriptonit/multi-nginx ./nginx
-  - doker build -t javascriptonit/multi-server ./server
-  - doker build -t javascriptonit/multi-worker ./worker
+  - docker build -t javascriptonit/multi-client ./client
+  - docker build -t javascriptonit/multi-nginx ./nginx
+  - docker build -t javascriptonit/multi-server ./server
+  - docker build -t javascriptonit/multi-worker ./worker
 # Log in to the Docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 # Take those images and push them to Docker hub
