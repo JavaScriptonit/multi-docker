@@ -3,7 +3,7 @@ services:
   postgres:
     image: 'postgres:latest'
     environment:
-      - POSTGRES_PASSWORD=postgres_password
+      - POSTGRES_PASSWORD=postgres_password # use password and user (creating postgres database in AWS)
   redis: 
     image: 'redis:latest'
   nginx:
@@ -24,11 +24,11 @@ services:
       - /app/node_modules
       - ./server:/app
     environment: # variableName=value - to set a variable in the container at run time
-      - REDIS_HOST=redis # key=name_of_the_service
+      - REDIS_HOST=redis # key=name_of_the_service // Primary Endpoint in EC redis instance: name and value
       - REDIS_PORT=6379 # documentation on hub.docker - to start a redis IMAGE: have to connect to port 6379
       - PGUSER=postgres
-      - PGHOST=postgres
-      - PGDATABASE=postgres
+      - PGHOST=postgres # RDS dashbord -> instances -> connect -> Endpoint -> copy link
+      - PGDATABASE=postgres # PGDATABASE = fibvalues
       - PGPASSWORD=postgres_password
       - PGPORT=5432
   client:
