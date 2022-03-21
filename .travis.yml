@@ -30,5 +30,5 @@ deploy:
   bucket_path: 'docker-multi'
   on:
     branch: master
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key: $AWS_SECRET_KEY
+  access_key_id: $AWS_ACCESS_KEY # Travis Keys Update in lecture /15422768
+  secret_access_key: $AWS_SECRET_KEY # Travis Keys Update in lecture /15422768
